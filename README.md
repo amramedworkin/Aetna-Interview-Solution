@@ -1,4 +1,4 @@
-![Alt text](./log.svg)
+![AetnaCVS Logo](./logo.svg)
 # Aetna Interview
 ## *Solutions Architecture Package*
  
