@@ -37,19 +37,24 @@ Ensures that each business requirement is mapped to system components and addres
 ---
 
 ## FOLDER: 03_Architecture_Design/
-### `03_07_Context_Diagram.vsdx`
+### `03_07_Context_Diagram.puml`
+### `03_07_Context_Diagram.svg`
 Visual diagram showing the boundaries of the system, external users, and interfacing systems.
 
-### `03_08_Logical_Architecture.vsdx`
-Shows the logical structure of components, services, and data flow � abstracted from physical deployment details.
+### `03_08_Logical_Architecture.puml`
+### `03_08_Logical_Architecture.svg`
+Shows the logical structure of components, services, and data flow  abstracted from physical deployment details.
 
-### `03_09_Physical_Deployment_Diagram.vsdx`
+### `03_09_Physical_Deployment_Diagram.puml`
+### `03_09_Physical_Deployment_Diagram.svg`
 Provides the actual deployment layout (AWS resources such as VPCs, ECS, RDS, etc.) for production infrastructure.
 
-### `03_10_Data_Model.vsdx`
+### `03_10_Data_Model.puml`
+### `03_10_Data_Model.svg`
 Logical entity-relationship diagram representing domain models such as Movies and Ratings.
 
-### `03_11_Integration_Model.vsdx`
+### `03_11_Integration_Model.puml`
+### `03_11_Integration_Model.svg`
 Details interfaces, API endpoints, protocols, and data flow across systems and services.
 
 ### `03_12_Security_Architecture_Overview.docx`
@@ -83,7 +88,7 @@ Presentation slide summarizing the phased implementation plan in a visual format
 
 ## FOLDER: 06_Final_Delivery/
 ### *`06_19_Architecture_Overview_OnePager.pdf`
-Single-page visual + narrative summary of the architecture � suitable for executive review.
+Single-page visual + narrative summary of the architecture  suitable for executive review.
 
 ### `06_20_Final_Presentation_Deck.pptx`
 10-slide (max) visual architecture presentation, tailored for a 30-minute briefing covering design, value alignment, risks, and roadmap.
@@ -118,11 +123,11 @@ Contains scratch work, interview notes, and design prototypes.
 
 ## Tooling and Standards
 
-- Diagrams: Created in PlantUML (`.puml`) � exportable to `.svg` or `.png`
+- Diagrams: Created in PlantUML (`.puml`), exportable to `.svg` or `.png`
 - Text Docs: MS Word (`.docx`)
 - Spreadsheets: MS Excel (`.xlsx`)
 - Presentations: MS PowerPoint (`.pptx`)
-- ADRs: Markdown (`.md`) � GitHub-friendly
+- ADRs: Markdown (`.md`)  GitHub-friendly
 - All files version-controlled in GitHub
 - Follows TOGAF-style layered methodology and AWS Well-Architected Framework
 
