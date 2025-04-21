@@ -1,0 +1,7 @@
+Notes / Missing Pieces
+
+1. No explicit security policy or roles defined in the specification.
+2. Deployment target (e.g., Docker, Heroku, AWS) is not defined.
+3. External API access or authentication mechanisms are not mentioned.
+4. SLA and observability (monitoring/logging) requirements not specified.
+5. DB schema not yet extracted (requires exploration of SQLite file).

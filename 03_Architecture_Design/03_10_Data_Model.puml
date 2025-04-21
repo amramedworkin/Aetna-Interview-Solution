@@ -1,0 +1,38 @@
+@startuml 10_Data_Model
+' Set the font size and color for the new title
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+' Existing title
+skinparam titleFontSize 30
+title Data Model
+
+entity "movies" {
+    + movieId : INTEGER [PK]
+    --
+    imdbId : TEXT
+    title : TEXT
+    overview : TEXT
+    productionCompanies : TEXT
+    releaseDate : TEXT
+    budget : INTEGER
+    revenue : INTEGER
+    runtime : REAL
+    language : TEXT
+    genres : TEXT
+    status : TEXT
+}
+
+entity "ratings" {
+    + ratingId : INTEGER [PK]
+    --
+    userId : INTEGER
+    movieId : INTEGER [FK]
+    rating : REAL
+    timestamp : INTEGER
+}
+
+movies ||..o{ ratings : contains
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml SecurityArchitecture
+
+actor "User"
+component "API Gateway"
+component "Cognito Hosted UI"
+component "Token Validation Layer"
+component "Spring Security"
+database "PostgreSQL (IAM Auth)"
+component "AWS Secrets Manager"
+
+User --> "Cognito Hosted UI" : Login (OAuth2)
+"Cognito Hosted UI" --> User : Returns JWT Access Token
+
+User --> "API Gateway" : Sends Request + JWT Token
+"API Gateway" --> "Token Validation Layer" : Verify JWT
+"Token Validation Layer" --> "Spring Security" : Grant Access
+
+"Spring Security" --> "AWS Secrets Manager" : Fetch DB Creds
+"Spring Security" --> "PostgreSQL (IAM Auth)" : Access DB (IAM Role)
+
+legend right
+|= Security Component |= Responsibility |= Notes |
+| Cognito Hosted UI | User login, registration, token issuing | OAuth2, JWT | 
+| API Gateway | First layer of defense | Accepts only valid JWT |
+| Token Validation Layer | Parses and validates JWT | Checks expiration, issuer, audience |
+| Spring Security | Enforces roles & route protection | Uses roles/claims in JWT |
+| AWS Secrets Manager | Secure credential storage | Fetched via IAM from ECS |
+| PostgreSQL (IAM Auth) | Backend data store | IAM-based access control |
+endlegend
+
+@enduml

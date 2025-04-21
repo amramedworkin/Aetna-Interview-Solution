@@ -1,0 +1,29 @@
+@startuml
+' Set the font size and color for the new title
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+' Existing title
+skinparam titleFontSize 30
+title Context Diagram
+
+actor "External User" as User
+
+rectangle "Amazon API Gateway" <<Gateway>> {
+    rectangle "ECS Fargate\n(Spring Boot API)" as API
+}
+
+database "Amazon RDS\n(PostgreSQL)" as RDS
+cloud "Amazon Cognito" as Cognito
+cloud "Amazon CloudWatch" as CloudWatch
+
+' Define custom color for Amazon API Gateway
+skinparam RectangleBackgroundColor<<Gateway>> #E6F9E6
+
+User --> API : HTTPS REST Requests
+API --> RDS : Query movies/ratings
+API --> Cognito : Validate Access Token
+API --> CloudWatch : Logs / Metrics
+
+@enduml

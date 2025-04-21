@@ -1,0 +1,47 @@
+@startuml 11_Integration_Model
+
+' Project and Title Header
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+skinparam titleFontSize 30
+title 11_Integration_Model
+
+' Make the legend/table lighter
+skinparam LegendBackgroundColor #F2F2F2  ' light gray
+skinparam LegendBorderColor #CCCCCC       ' subtle border
+
+actor "Client App" as Client
+rectangle "API Gateway" {
+    interface "REST Interface" as API
+}
+
+component "Movie API (Spring Boot)" as APIService
+database "PostgreSQL (RDS)" as DB
+component "Cognito Auth" as Auth
+component "Rating Aggregation Service" as Ratings
+component "CloudWatch Logs" as Logs
+component "Secrets Manager" as Secrets
+
+Client --> API : REST Calls (GET /movies, /movies/{id})
+API --> APIService : Forward Request
+APIService --> Auth : Validate JWT Token
+APIService --> DB : Read Movie + Rating Data
+APIService --> Ratings : Aggregate Ratings
+APIService --> Secrets : Fetch DB Credentials
+APIService --> Logs : Emit Logs & Metrics
+
+legend bottom
+|= Step |= Action                                              |= Component                   |
+| 1     | Client sends HTTP GET request with JWT token         | Client App → API Gateway     |
+| 2     | API Gateway routes request to ECS service            | API Gateway                  |
+| 3     | JWT token is validated                               | APIService → Cognito Auth    |
+| 4     | Permissions and roles are enforced                   | Spring Security (APIService) |
+| 5     | Service fetches DB credentials securely              | APIService → Secrets Manager |
+| 6     | Movie and ratings data retrieved                     | APIService → PostgreSQL (RDS)|
+| 7     | Rating is aggregated and attached to response        | APIService → Rating Aggregation |
+| 8     | Logs and metrics emitted for observability           | APIService → CloudWatch Logs |
+endlegend
+
+@enduml

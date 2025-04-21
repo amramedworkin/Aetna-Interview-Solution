@@ -1,0 +1,53 @@
+@startuml 18_Phased_Architecture_Timeline
+
+' Project and Title Header
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+skinparam titleFontSize 30
+title 18_Phased_Architecture_Timeline
+
+package "Dev Infra" {
+  [Amazon Workspaces]
+  [GitHub Actions]
+  [Docker + Java 17]
+}
+
+package "Local Architecture" {
+  [Spring Boot API]
+  [SQLite DB]
+  [JUnit + Swagger]
+}
+
+package "Cloud Base" {
+  [Amazon VPC]
+  [Amazon ECS Fargate]
+  [Amazon RDS]
+  [API Gateway]
+}
+
+package "Security & Observability" {
+  [Amazon Cognito]
+  [API Gateway Auth]
+  [CloudWatch]
+  [SNS Alerts]
+}
+
+package "Staging & Prod" {
+  [Staging VPC]
+  [Blue/Green Deploy]
+  [GitHub Branching Strategy]
+  [API Rate Limiting]
+}
+
+[Amazon Workspaces] --> [Spring Boot API]
+[Spring Boot API] --> [SQLite DB]
+[Spring Boot API] --> [Amazon ECS Fargate]
+[Amazon ECS Fargate] --> [Amazon RDS]
+[API Gateway] --> [Spring Boot API]
+[API Gateway] --> [Amazon Cognito]
+[Spring Boot API] --> [CloudWatch]
+[CloudWatch] --> [SNS Alerts]
+
+@enduml
