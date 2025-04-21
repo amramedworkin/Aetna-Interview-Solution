@@ -1,97 +1,97 @@
-# ?? Solutions Architecture Package - ReadMe
+# - Solutions Architecture Package - ReadMe
 
 Welcome to the Solution Architecture Package for the Aetna Interview Project - Movie API. This document is your guide to understanding the structure, content, and usage of the deliverables in this repository. Each folder and file in this package serves a specific purpose aligned with the architecture lifecycle: from discovery to delivery.
 
 ---
 
-## ?? 00_ReadMe/
-### ? `00_00_ReadMe.md`
+## - 00_ReadMe/
+### * `00_00_ReadMe.md`
 This file. Describes the full structure, purpose, and navigation of the solution architecture package.
 
 ---
 
-## ?? 01_Business_Context/
-### ? `01_01_Project_Goals_and_Objectives.docx`
+## - 01_Business_Context/
+###*`01_01_Project_Goals_and_Objectives.docx`
 Outlines the business drivers, success criteria, and objectives of the project.
 
-### ? `01_02_Stakeholder_Map.xlsx`
+###*`01_02_Stakeholder_Map.xlsx`
 Maps key stakeholders, their influence, and their engagement level. Used to drive communication and decision-making alignment.
 
-### ? `01_03_Business_Capability_Map.pptx`
+###*`01_03_Business_Capability_Map.pptx`
 Visual map connecting business capabilities to proposed technical components and business outcomes.
 
 ---
 
-## ?? 02_Requirements/
-### ? `02_04_Functional_Requirements.docx`
+## - 02_Requirements/
+###*`02_04_Functional_Requirements.docx`
 Captures user stories and high-level system functions required to meet the business needs.
 
-### ? `02_05_NonFunctional_Requirements.xlsx`
+###*`02_05_NonFunctional_Requirements.xlsx`
 Defines critical quality attributes including availability, performance, security, and scalability.
 
-### ? `02_06_Traceability_Matrix.xlsx`
+###*`02_06_Traceability_Matrix.xlsx`
 Ensures that each business requirement is mapped to system components and addressed within the architecture.
 
 ---
 
-## ?? 03_Architecture_Design/
-### ? `03_07_Context_Diagram.vsdx`
+## - 03_Architecture_Design/
+###*`03_07_Context_Diagram.vsdx`
 Visual diagram showing the boundaries of the system, external users, and interfacing systems.
 
-### ? `03_08_Logical_Architecture.vsdx`
+###*`03_08_Logical_Architecture.vsdx`
 Shows the logical structure of components, services, and data flow � abstracted from physical deployment details.
 
-### ? `03_09_Physical_Deployment_Diagram.vsdx`
+###*`03_09_Physical_Deployment_Diagram.vsdx`
 Provides the actual deployment layout (AWS resources such as VPCs, ECS, RDS, etc.) for production infrastructure.
 
-### ? `03_10_Data_Model.vsdx`
+###*`03_10_Data_Model.vsdx`
 Logical entity-relationship diagram representing domain models such as Movies and Ratings.
 
-### ? `03_11_Integration_Model.vsdx`
+###*`03_11_Integration_Model.vsdx`
 Details interfaces, API endpoints, protocols, and data flow across systems and services.
 
-### ? `03_12_Security_Architecture_Overview.docx`
+###*`03_12_Security_Architecture_Overview.docx`
 Covers authentication, authorization, data encryption, access policies, and compliance requirements using AWS services like Cognito and Secrets Manager.
 
-### ? `03_13_ADRs/`
+###*`03_13_ADRs/`
 Contains Architecture Decision Records (`.md` files) documenting important design decisions, context, alternatives considered, and consequences.
 
 ---
 
-## ?? 04_Risk_and_Tradeoffs/
-### ? `04_14_Risk_Register.xlsx`
+## - 04_Risk_and_Tradeoffs/
+###*`04_14_Risk_Register.xlsx`
 Lists risks specific to the architecture, their probability and impact, and defined mitigation strategies.
 
-### ? `04_15_TradeOff_Analysis_Matrix.docx`
+###*`04_15_TradeOff_Analysis_Matrix.docx`
 Evaluates key architecture options and their trade-offs (e.g., performance vs. cost).
 
-### ? `04_16_Assumptions_And_Dependencies.docx`
+###*`04_16_Assumptions_And_Dependencies.docx`
 Documents key assumptions (e.g., developer skill sets, AWS usage) and external dependencies (e.g., data availability).
 
 ---
 
-## ?? 05_Roadmap/
-### ? `05_17_Implementation_Roadmap.xlsx`
+## - 05_Roadmap/
+###*`05_17_Implementation_Roadmap.xlsx`
 Outlines the project phases, timelines, and key milestones.
 
-### ? `05_18_Phased_Architecture_Timeline.pptx`
+###*`05_18_Phased_Architecture_Timeline.pptx`
 Presentation slide summarizing the phased implementation plan in a visual format for stakeholder review.
 
 ---
 
-## ?? 06_Final_Delivery/
-### ? `06_19_Architecture_Overview_OnePager.pdf`
+## - 06_Final_Delivery/
+###*`06_19_Architecture_Overview_OnePager.pdf`
 Single-page visual + narrative summary of the architecture � suitable for executive review.
 
-### ? `06_20_Final_Presentation_Deck.pptx`
+###*`06_20_Final_Presentation_Deck.pptx`
 10-slide (max) visual architecture presentation, tailored for a 30-minute briefing covering design, value alignment, risks, and roadmap.
 
-### ? `06_21_Deliverables_Index.xlsx`
+###*`06_21_Deliverables_Index.xlsx`
 Checklist of all included artifacts with descriptions, intended audiences, and ownership metadata.
 
 ---
 
-## ?? 07_Internal_Working_Files/ *(Not client-deliverable)*
+## - 07_Internal_Working_Files/ *(Not client-deliverable)*
 Contains scratch work, interview notes, and design prototypes.
 
 - `Interviews/`: Discovery notes, user interviews
@@ -101,7 +101,7 @@ Contains scratch work, interview notes, and design prototypes.
 
 ---
 
-## ?? How to Use This Package
+## - How to Use This Package
 
 | Role | How to Use |
 |------|------------|
@@ -114,7 +114,7 @@ Contains scratch work, interview notes, and design prototypes.
 
 ---
 
-## ??? Tooling and Standards
+## + Tooling and Standards
 
 - Diagrams: Created in PlantUML (`.puml`) � exportable to `.svg` or `.png`
 - Text Docs: MS Word (`.docx`)
@@ -126,7 +126,7 @@ Contains scratch work, interview notes, and design prototypes.
 
 ---
 
-## ?? Versioning & Updates
+## - Versioning & Updates
 
 This package represents **Version 1.0** of the architecture. Updates will be maintained via GitHub PRs and noted in `21_Deliverables_Index.xlsx`.
 
