@@ -6,10 +6,10 @@ Welcome to the Solution Architecture Package for the Aetna Interview Project - M
 
 ---
 `Logical Architecture`
-[Logical Architecture](03_Architecture_Design/03_08_Logical_Architecture.svg)
+[Logical Architecture](./03_Architecture_Design/03_08_Logical_Architecture.svg)
 
 `Physical Architecture`
-[Logical Architecture](03_Architecture_Design/03_09_Physical_Deployment_Diagram.svg)
+[Logical Architecture](./03_Architecture_Design/03_09_Physical_Deployment_Diagram.svg)
 
 ## FOLDER: 00_ReadMe/
 ### `00_00_ReadMe.md` [click](00_ReadMe/00_00_ReadMe.md)
