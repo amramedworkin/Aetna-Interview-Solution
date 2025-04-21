@@ -13,13 +13,13 @@ This file. Describes the full structure, purpose, and navigation of the solution
 ---
 
 ## FOLDER: 01_Business_Context/
-### `01_01_Project_Goals_and_Objectives.docx`
+### `01_01_Project_Goals_and_Objectives.docx` [click](01_Business_Context/01_01_Project_Goals_and_Objectives.docx)
 Outlines the business drivers, success criteria, and objectives of the project.
 
 ### `01_02_Stakeholder_Map.xlsx`
 Maps key stakeholders, their influence, and their engagement level. Used to drive communication and decision-making alignment.
 
-###*`01_03_Business_Capability_Map.pptx`
+### `01_03_Business_Capability_Map.pptx` [click](01_Business_Context/01_03_Business_Capability_Map.pptx)
 Visual map connecting business capabilities to proposed technical components and business outcomes.
 
 ---
