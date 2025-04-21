@@ -1,4 +1,6 @@
-# Aetna Interview - Solutions Architecture Package - ![AetnaCVS Logo](./logo.svg)
+![Alt text](./log.svg)
+# Aetna Interview
+## *Solutions Architecture Package*
  
 Welcome to the Solution Architecture Package for the Aetna Interview Project - Movie API. This document is your guide to understanding the structure, content, and usage of the deliverables in this repository. Each folder and file in this package serves a specific purpose aligned with the architecture lifecycle: from discovery to delivery.
 
