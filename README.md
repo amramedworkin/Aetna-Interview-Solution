@@ -42,10 +42,10 @@ Ensures that each business requirement is mapped to system components and addres
 ---
 
 ## FOLDER: 03_Architecture_Design/
-### `03_07_Context_Diagram.puml / 03_07_Context [click]()_Diagram.svg` [puml](03_Architecture_Design/03_07_Context_Diagram.puml) [image](03_Architecture_Design/03_07_Context_Diagram.svg)
+### `03_07_Context_Diagram.puml` [image](03_Architecture_Design\03_07_Context_Diagram.svg) [puml](03_Architecture_Design\03_07_Context_Diagram.puml)
 Visual diagram showing the boundaries of the system, external users, and interfacing systems.
 
-### `03_08_Logical_Architecture.puml / 03_08_Logical_Architecture.svg` [puml](03_Architecture_Design/03_08_Logical_Architecture_Diagram.puml) [image](03_Architecture_Design/03_08_Logical_Architecture_Diagram.svg) [prod](03_Architecture_Design/08_Logical_Architecture/03_08a_Logical_Architecture_PRODUCTION_Diagram.svg) [dev](03_Architecture_Design/08_Logical_Architecture/03_08a_Logical_Architecture_DEVELOPMENT_Diagram.svg) [cicd](03_Architecture_Design/08_Logical_Architecture/03_08a_Logical_Architecture_CICD_PIPELINE.svg)
+### `03_08_Logical_Architecture.puml / 03_08_Logical_Architecture.svg` [full](03_Architecture_Design\03_08_Logical_Architecture_Diagram.svg) [production](03_Architecture_Design\08_Logical_Architecture\03_08a_Logical_Architecture_PRODUCTION_Diagram.svg) [development](03_Architecture_Design\08_Logical_Architecture\03_08b_Logical_Architecture_DEVELOPMENT_Diagram.svg) [CICD](03_Architecture_Design\08_Logical_Architecture\03_08c_Logical_Architecture_CICD_PIPELINE.svg)
 Shows the logical structure of components, services, and data flow  abstracted from physical deployment details.
 
 ### `03_09_Physical_Deployment_Diagram.puml / 03_09_Physical_Deployment_Diagram.svg` [click](03_Architecture_Design/03_09_Physical_Deployment_Diagram.puml)
