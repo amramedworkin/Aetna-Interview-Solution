@@ -12,61 +12,61 @@ Welcome to the Solution Architecture Package for the Aetna Interview Project - M
 ![Physical Deployment Diagram](./03_Architecture_Design/03_09_Physical_Deployment_Diagram.svg)
 
 ## 📘 00_ReadMe/
-### `00_00_ReadMe.md` [click](00_ReadMe/00_00_ReadMe.md)
+### `00_00_ReadMe.md` [📝](00_ReadMe/00_00_ReadMe.md)
 This file. Describes the full structure, purpose, and navigation of the solution architecture package.
 
 ---
 
 ## 💼 01_Business_Context/
-### `01_01_Project_Goals_and_Objectives.docx` [click](01_Business_Context/01_01_Project_Goals_and_Objectives.docx)
+### `01_01_Project_Goals_and_Objectives.docx` [📄](01_Business_Context/01_01_Project_Goals_and_Objectives.docx)
 Outlines the business drivers, success criteria, and objectives of the project.
 
-### `01_02_Stakeholder_Map.xlsx` [click](01_Business_Context/01_02_Stakeholder_Map.xlsx)
+### `01_02_Stakeholder_Map.xlsx` [📊](01_Business_Context/01_02_Stakeholder_Map.xlsx)
 Maps key stakeholders, their influence, and their engagement level. Used to drive communication and decision-making alignment.
 
-### `01_03_Business_Capability_Map.pptx` [click](01_Business_Context/01_03_Business_Capability_Map.pptx)
+### `01_03_Business_Capability_Map.pptx` [📽️](01_Business_Context/01_03_Business_Capability_Map.pptx)
 Visual map connecting business capabilities to proposed technical components and business outcomes.
 
 ---
 
 ## ✅ 02_Requirements/
-### `02_04_Functional_Requirements.docx` [click](02_Requirements/02_04_Functional_Requirements.docx)
+### `02_04_Functional_Requirements.docx` [📄](02_Requirements/02_04_Functional_Requirements.docx)
 Captures user stories and high-level system functions required to meet the business needs.
 
-### `02_05_NonFunctional_Requirements.xlsx` [click](02_Requirements/02_05_NonFunctional_Requirements.xlsx)
+### `02_05_NonFunctional_Requirements.xlsx` [📊](02_Requirements/02_05_NonFunctional_Requirements.xlsx)
 Defines critical quality attributes including availability, performance, security, and scalability.
 
-### `02_06_Traceability_Matrix.xlsx` [click](02_Requirements/02_06_Traceability_Matrix.xlsx)
+### `02_06_Traceability_Matrix.xlsx` [📊](02_Requirements/02_06_Traceability_Matrix.xlsx)
 Ensures that each business requirement is mapped to system components and addressed within the architecture.
 
 ---
 
 ## 🏗️ 03_Architecture_Design/
-### `03_07_Context_Diagram.puml` [image,](03_Architecture_Design/03_07_Context_Diagram.svg) [puml](03_Architecture_Design/03_07_Context_Diagram.puml)
+### `03_07_Context_Diagram.puml` [🖼️](03_Architecture_Design/03_07_Context_Diagram.svg)
 Visual diagram showing the boundaries of the system, external users, and interfacing systems.
 
-### `03_08_Logical_Architecture.puml / 03_08_Logical_Architecture.svg` [full,](03_Architecture_Design/03_08_Logical_Architecture_Diagram.svg) [production,](03_Architecture_Design/08_Logical_Architecture/03_08a_Logical_Architecture_PRODUCTION_Diagram.svg) [development,](03_Architecture_Design/08_Logical_Architecture/03_08b_Logical_Architecture_DEVELOPMENT_Diagram.svg) [CICD](03_Architecture_Design/08_Logical_Architecture/03_08c_Logical_Architecture_CICD_PIPELINE.svg)
+### `03_08_Logical_Architecture.puml / 03_08_Logical_Architecture.svg` [🖼️full,](03_Architecture_Design/03_08_Logical_Architecture_Diagram.svg) [🟢production,](03_Architecture_Design/08_Logical_Architecture/03_08a_Logical_Architecture_PRODUCTION_Diagram.svg) [🔵development,](03_Architecture_Design/08_Logical_Architecture/03_08b_Logical_Architecture_DEVELOPMENT_Diagram.svg) [⚙️CICD](03_Architecture_Design/08_Logical_Architecture/03_08c_Logical_Architecture_CICD_PIPELINE.svg)
 Shows the logical structure of components, services, and data flow  abstracted from physical deployment details.
 
-### `03_09_Physical_Deployment_Diagram.puml / 03_09_Physical_Deployment_Diagram.svg` [full,](03_Architecture_Design/03_09_Physical_Deployment_Diagram.svg) [production,](03_Architecture_Design/09_Physical_Deployment_Architecture/03_09a_Physical_Deployment_PRODUCTION_Architecture.svg) [development](03_Architecture_Design/09_Physical_Deployment_Architecture/03_09b_Physical_Deployment_DEVELOPMENT_Architecture.svg)
+### `03_09_Physical_Deployment_Diagram.puml / 03_09_Physical_Deployment_Diagram.svg` [🖼️full,](03_Architecture_Design/03_09_Physical_Deployment_Diagram.svg) [🟢production,](03_Architecture_Design/09_Physical_Deployment_Architecture/03_09a_Physical_Deployment_PRODUCTION_Architecture.svg) [🔵development](03_Architecture_Design/09_Physical_Deployment_Architecture/03_09b_Physical_Deployment_DEVELOPMENT_Architecture.svg)
 Provides the actual deployment layout (AWS resources such as VPCs, ECS, RDS, etc.) for production infrastructure.
 
-### `03_10_Data_Model.puml / 03_10_Data_Model.svg` [image](03_Architecture_Design/03_10_Data_Model.svg)
+### `03_10_Data_Model.puml / 03_10_Data_Model.svg` [🖼️](03_Architecture_Design/03_10_Data_Model.svg)
 Logical entity-relationship diagram representing domain models such as Movies and Ratings.
 
-### `03_11_Integration_Model.puml / 03_11_Integration_Model.svg` [image](03_Architecture_Design/03_11_Integration_Model.svg)
+### `03_11_Integration_Model.puml / 03_11_Integration_Model.svg` [🖼️](03_Architecture_Design/03_11_Integration_Model.svg)
 Details interfaces, API endpoints, protocols, and data flow across systems and services.
 
-### `03_12_Security_Architecture_Overview.docx` [doc,](03_Architecture_Design/12_Security_Architecture/03_12_Security_Architecture_Overview.docx) [image](03_Architecture_Design/03_12_Security_Architecture_Overview.svg)
+### `03_12_Security_Architecture_Overview.docx` [📄,](03_Architecture_Design/12_Security_Architecture/03_12_Security_Architecture_Overview.docx) [🖼️](03_Architecture_Design/03_12_Security_Architecture_Overview.svg)
 Covers authentication, authorization, data encryption, access policies, and compliance requirements using AWS services like Cognito and Secrets Manager.
 
-### `03_13_ADRs/`
+### `📁 03_13_ADRs/`
 Contains Architecture Decision Records (`.md` files) documenting important design decisions, context, alternatives considered, and consequences.
 
 ---
 
 ## ⚖️ 04_Risk_and_Tradeoffs/
-### `04_14_Risk_Register.xlsx` [click](04_Risk_and_Tradeoffs/04_14_Risk_Register.xlsx)
+### `04_14_Risk_Register.xlsx` [📊](04_Risk_and_Tradeoffs/04_14_Risk_Register.xlsx)
 Lists risks specific to the architecture, their probability and impact, and defined mitigation strategies.
 
 ### `04_15_TradeOff_Analysis_Matrix.docx` [click](04_Risk_and_Tradeoffs/04_15_TradeOff_Analysis_Matrix.docx)
@@ -78,7 +78,7 @@ Documents key assumptions (e.g., developer skill sets, AWS usage) and external d
 ---
 
 ## 🗺️ 05_Roadmap/
-### `05_17_Implementation_Roadmap.xlsx` [click](05_Roadmap/05_17_Implementation_Roadmap.xlsx)
+### `05_17_Implementation_Roadmap.xlsx` [📊](05_Roadmap/05_17_Implementation_Roadmap.xlsx)
 Outlines the project phases, timelines, and key milestones.
 
 ### `05_18_Phased_Architecture_Timeline.pptx` [click](05_Roadmap/05_18_Phased_Architecture_Timeline.pptx)
@@ -93,7 +93,7 @@ Single-page visual + narrative summary of the architecture  suitable for executi
 ### `06_20_Final_Presentation_Deck.pptx` [click](06_Final_Delivery/06_20_Final_Presentation_Deck.pptx)
 10-slide (max) visual architecture presentation, tailored for a 30-minute briefing covering design, value alignment, risks, and roadmap.
 
-### `06_21_Deliverables_Index.xlsx` [click](06_Final_Delivery/06_21_Deliverables_Index.xlsx)
+### `06_21_Deliverables_Index.xlsx` [📊](06_Final_Delivery/06_21_Deliverables_Index.xlsx)
 Checklist of all included artifacts with descriptions, intended audiences, and ownership metadata.
 
 ---
