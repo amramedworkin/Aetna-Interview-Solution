@@ -1,0 +1,81 @@
+@startuml
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project - Customer Authentication and Movie Lookup
+
+skinparam titleFontSize 24
+title Process: Customer Authentication and Movie Lookup
+
+actor "Movie Enthusiast" as User
+
+' === Vertical Stack Using Layout Hints ===
+rectangle "Blazor Web App" {
+  [Authentication UI] as AuthUI
+  [Movie Lookup UI] as LookupUI
+}
+
+rectangle "AWS API Gateway" {
+  [API Gateway] as APIGW
+}
+
+rectangle "Spring Boot Movie Service (ECS Fargate)" {
+  [Security Filter Chain] as SecurityFilter
+  [Movie Controller] as MovieController
+  [Movie Business Logic] as MovieLogic
+  database "Amazon RDS - PostgreSQL" as MovieDB
+}
+
+database "Amazon Cognito" as Cognito
+database "AWS Secrets Manager" as SecretsManager
+
+' === Layout Control ===
+' Use directions to control vertical ordering
+' Stack boundaries from top to bottom manually with "together" grouping disabled
+
+' --- User Authentication ---
+User -> AuthUI : 1. Initiates Login
+AuthUI -> Cognito : 2. Redirects to Cognito Hosted UI
+Cognito -> User : 3. Presents Login Form
+User -> Cognito : 4. Submits Credentials
+Cognito -> AuthUI : 5. Sends Authorization Code
+AuthUI -> Cognito : 6. Exchanges Code for Tokens
+Cognito -> AuthUI : 7. Returns ID & Access Tokens
+AuthUI -> AuthUI : 8. Stores Tokens (e.g., localStorage)
+
+' --- Movie Lookup ---
+User -> LookupUI : 9. Enters "The Matrix" and submits
+LookupUI -> AuthUI : 10. Retrieves Access Token
+AuthUI -> APIGW : 11. Sends Movie Lookup Request
+APIGW -> MovieController : 12. Forwards Request
+MovieController -> SecurityFilter : 13. Intercepts Request
+SecurityFilter -> Cognito : 14. Verifies JWT Token
+Cognito --> SecurityFilter : 15. Returns User Info
+SecurityFilter -> MovieController : 16. Allows Request
+MovieController -> MovieLogic : 17. Calls Movie Logic
+MovieLogic -> MovieDB : 18. Queries Movie DB
+MovieDB --> MovieLogic : 19. Returns Data
+MovieLogic -> MovieController : 20. Formats Response
+MovieController -> SecurityFilter : 21. Returns JSON
+SecurityFilter -> APIGW : 22. Sends Response
+APIGW -> AuthUI : 23. Returns JSON
+AuthUI -> LookupUI : 24. Displays Movie Info
+
+' --- Secrets Management ---
+MovieController -> SecretsManager : 25. Get DB Credentials
+SecretsManager --> MovieController : 26. Return Credentials
+MovieController -> MovieDB : 27. Secure JDBC Connection
+
+' === Notes ===
+note left of User : Interacts via browser (HTTPS)
+note left of AuthUI : Single-Page App (Blazor)
+note right of APIGW : RESTful API (HTTPS)
+note right of MovieController : Spring Boot REST API
+note right of Cognito : OAuth 2.0 Server
+note right of SecretsManager : Secure secret store
+note right of MovieDB : PostgreSQL (JDBC)
+
+' === Style ===
+skinparam componentStyle uml2
+skinparam databaseStyle uml2
+skinparam cloudStyle uml2
+@enduml

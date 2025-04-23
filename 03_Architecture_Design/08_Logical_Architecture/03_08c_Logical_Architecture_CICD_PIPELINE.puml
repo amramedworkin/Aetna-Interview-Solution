@@ -1,0 +1,49 @@
+@startuml 08c_Logical_Architecture_CICD_PIPELINE
+!theme mars
+' Project and Title Header
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+skinparam titleFontSize 30
+title 08c_Logical_Architecture_CICD_PIPELINE
+
+' Make the legend/table lighter
+skinparam LegendBackgroundColor #F2F2F2  ' light gray
+skinparam LegendBorderColor #CCCCCC    ' subtle border
+
+actor "Developer" as Dev
+actor "Ops Team" as Ops << (S, #FFA07A) >>
+
+cloud "① GitHub" as GitHub
+cloud "② GitHub Actions" as GHActions
+cloud "③ Amazon ECR" as ECR
+cloud "⑤ Amazon ECS (Fargate)" as ECS
+cloud "④ AWS CDK" as CDK
+cloud "⑥ Amazon CloudWatch" as CW
+cloud "⑦ Slack / SNS" as Notifications
+
+Dev --> GitHub : Push Code
+GitHub --> GHActions : Trigger Build
+GHActions --> GHActions : Build/Test
+GHActions --> ECR : Push Image
+GHActions --> CDK : Deploy Infra/API
+CDK --> ECS : Update Service
+ECS --> CW : Logs/Metrics
+CW --> Notifications : Alerts/Notices
+Notifications --> Dev : Deployment Status
+Notifications --> Ops : Operational Alerts
+
+' UML Table for CI/CD Components
+legend bottom
+|= Step |= Component |= Description |= Category |
+| 1 | GitHub        | Repo + Trigger       | Source Control   |
+| 2 | GitHub Actions| CI Workflow          | CI/CD            |
+| 3 | ECR           | Docker Image Store   | Container Registry |
+| 4 | CDK           | Infrastructure as Code | IaC              |
+| 5 | ECS           | Fargate Deployment   | Compute            |
+| 6 | CloudWatch    | Logs + Metrics       | Monitoring         |
+| 7 | SNS/Slack     | Alerts               | Notification       |
+| S | Ops Team      | Receives operational alerts | Alert Recipient    |
+endlegend
+@enduml

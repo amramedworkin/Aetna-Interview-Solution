@@ -1,0 +1,47 @@
+@startuml 09_Physical_Deployment_Diagram                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+' Set the font size and color for the new title
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+' Existing title
+skinparam titleFontSize 30
+title 09_Physical_Deployment_Diagram
+
+' Make the legend/table lighter
+skinparam LegendBackgroundColor #F2F2F2  ' light gray
+skinparam LegendBorderColor #CCCCCC       ' subtle border
+
+cloud "AWS Cloud" {
+    node "VPC (10.0.0.0/16)" {
+        node "Public Subnet" {
+            [API Gateway]
+        }
+
+        node "Private Subnet" {
+            [ECS Fargate - Movie API]
+            [Amazon RDS - PostgreSQL]
+        }
+
+        node "Shared Services" {
+            [Amazon Cognito]
+            [AWS Secrets Manager]
+            [AWS Systems Manager]
+            [CloudWatch]
+            [SNS (Alerts)]
+        }
+    }
+}
+
+actor "External User" as User
+
+User --> [API Gateway] : HTTPS Request
+[API Gateway] --> [ECS Fargate - Movie API] : Routes Request
+[ECS Fargate - Movie API] --> [Amazon RDS - PostgreSQL] : DB Access
+[ECS Fargate - Movie API] --> [Amazon Cognito] : Auth
+[ECS Fargate - Movie API] --> [CloudWatch] : Logs & Metrics
+[ECS Fargate - Movie API] --> [AWS Secrets Manager] : DB/Token Secrets
+[ECS Fargate - Movie API] --> [AWS Systems Manager] : Config Params
+[CloudWatch] --> [SNS (Alerts)] : Triggers Notification
+
+@enduml

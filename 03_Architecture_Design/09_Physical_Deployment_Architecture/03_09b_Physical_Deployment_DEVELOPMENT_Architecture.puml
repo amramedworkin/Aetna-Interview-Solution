@@ -1,0 +1,119 @@
+@startuml 09b_Physical_Deployment_Diagram_DEVELOPMENT
+!theme mars
+
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+skinparam titleFontSize 30
+title 09b_Physical_Deployment_Diagram_DEVELOPMENT
+
+' Make the legend/table lighter
+skinparam LegendBackgroundColor #F2F2F2  ' light gray
+skinparam LegendBorderColor #CCCCCC    ' subtle border
+
+skinparam cloudFontColor #000000
+skinparam rectangle {
+  BackgroundColor<<aws>> #f7faff
+  BorderColor<<aws>> #0096d6
+}
+skinparam node {
+  BackgroundColor<<local>> #e0f2f7
+  BorderColor<<local>> #00acc1
+}
+
+actor "① Developer" as Developer
+
+cloud "② AWS Cloud" <<aws>> {
+  node "③ VPC (Dev)" <<aws>> {
+    rectangle "④ Public Subnet (Dev)" as PublicSubnetDev {
+      [⑨ API Gateway (Dev)] <<aws>>
+    }
+    rectangle "⑤ Private Subnet (Dev)" as PrivateSubnetDev {
+      [⑩ ECS Fargate - Movie API (Dev)] <<aws>>
+      [⑪ Amazon RDS (Dev)] <<aws>>
+    }
+    rectangle "⑥ Shared Services (Dev)" as SharedServicesDev {
+      [⑫ Amazon Cognito (Dev Pool)] <<aws>>
+      [⑬ AWS Secrets Manager (Dev)] <<aws>>
+      [⑭ AWS Systems Manager (SSM) (Dev)] <<aws>>
+      [⑮ AWS CloudWatch (Dev Logs)] <<aws>>
+    }
+    node "⑦ Amazon ECR" <<aws>> {
+      [⑯ ECR Repository (Movie API)] <<aws>>
+    }
+  }
+  node "⑧ Amazon Workspaces" <<aws>> {
+    rectangle "⑰ Workspace Instance" <<aws>> {
+      node "⑱ Local Development" <<local>> {
+        database "⑲ SQLite (Local)" <<local>>
+        [⑳ Docker Engine] <<local>>
+        component "㉑ Movie API (Local Docker)" <<local>>
+      }
+    }
+  }
+  cloud "㉒ GitHub" <<external>>
+  cloud "㉓ GitHub Actions" <<external>>
+}
+
+' Developer Interaction
+Developer --> [⑰ Workspace Instance] : Connect
+
+' Workspace Local Development
+[⑰ Workspace Instance] --> [⑲ SQLite (Local)] : Access
+[⑰ Workspace Instance] --> [⑳ Docker Engine] : Run Container
+[⑳ Docker Engine] --> [㉑ Movie API (Local Docker)] : Run App
+
+' Workspace Interaction with AWS (Simulated Local Dev against Cloud)
+[⑰ Workspace Instance] --> [⑪ Amazon RDS (Dev)] : JDBC
+[⑰ Workspace Instance] --> [⑫ Amazon Cognito (Dev Pool)] : Auth Test
+[⑰ Workspace Instance] --> [⑬ AWS Secrets Manager (Dev)] : Fetch Secrets
+[⑰ Workspace Instance] --> [⑭ AWS Systems Manager (SSM) (Dev)] : Fetch Config
+[⑰ Workspace Instance] --> [⑨ API Gateway (Dev)] : Test API
+
+' CI/CD Flow (Simulated from Workspace for Clarity)
+[⑰ Workspace Instance] --> [㉒ GitHub] : Push Code
+[㉒ GitHub] --> [㉓ GitHub Actions] : Trigger CI
+[㉓ GitHub Actions] --> [⑯ ECR Repository (Movie API)] : Push Docker Image
+[㉓ GitHub Actions] --> [⑨ API Gateway (Dev)] : Update/Configure
+[㉓ GitHub Actions] --> [⑩ ECS Fargate - Movie API (Dev)] : Deploy New Version
+[㉓ GitHub Actions] --> [⑪ Amazon RDS (Dev)] : Schema Migrations (if any)
+
+' API Gateway Interaction
+[⑨ API Gateway (Dev)] --> [⑩ ECS Fargate - Movie API (Dev)] : API Call Routing
+
+' ECS Fargate Interaction
+[⑩ ECS Fargate - Movie API (Dev)] --> [⑪ Amazon RDS (Dev)] : Secure JDBC
+[⑩ ECS Fargate - Movie API (Dev)] --> [⑫ Amazon Cognito (Dev Pool)] : Token Verification
+[⑩ ECS Fargate - Movie API (Dev)] --> [⑬ AWS Secrets Manager (Dev)] : Retrieve Secrets
+[⑩ ECS Fargate - Movie API (Dev)] --> [⑭ AWS Systems Manager (SSM) (Dev)] : Config Parameters
+[⑩ ECS Fargate - Movie API (Dev)] --> [⑮ AWS CloudWatch (Dev Logs)] : Logs, Metrics
+
+legend bottom
+|= Step |= Component |= Description |= Category |
+| ①  | Developer                     | Software Engineer working on the API | Team Member        |
+| ②  | AWS Cloud                     | The overarching Amazon Web Services environment | Cloud Environment  |
+| ③  | VPC (Dev)                     | Virtual Private Cloud for the Development environment | Networking         |
+| ④  | Public Subnet (Dev)           | Publicly accessible subnet within the Dev VPC | Networking         |
+| ⑤  | Private Subnet (Dev)          | Privately accessible subnet within the Dev VPC | Networking         |
+| ⑥  | Shared Services (Dev)         | Subnet for shared development services | Networking         |
+| ⑦  | Amazon ECR                    | AWS Docker container registry service | Container Registry |
+| ⑧  | Amazon Workspaces             | Managed virtual desktop for developers | Development Tool   |
+| ⑨  | API Gateway (Dev)             | Entry point for the Development API | API Management     |
+| ⑩  | ECS Fargate - Movie API (Dev) | Stateless compute containers for the Dev API | Compute            |
+| ⑪  | Amazon RDS (Dev)              | PostgreSQL database for Dev environment | Database           |
+| ⑫  | Amazon Cognito (Dev Pool)     | Identity provider for the Development environment | Identity & Security |
+| ⑬  | AWS Secrets Manager (Dev)     | Secure storage for Dev environment secrets | Security           |
+| ⑭  | AWS Systems Manager (SSM) (Dev)| Parameter store for Dev configuration | Management         |
+| ⑮  | AWS CloudWatch (Dev Logs)     | Logging and monitoring for the Dev environment | Observability      |
+| ⑯  | ECR Repository (Movie API)    | Specific repository within ECR for the API's Docker images | Container Registry |
+| ⑰  | Workspace Instance            | Individual virtual desktop provisioned for the developer | Development Tool   |
+| ⑱  | Local Development             | Section representing tools on the Workspace | Local Environment  |
+| ⑲  | SQLite (Local)                | File-based database for local testing | Local Database     |
+| ⑳  | Docker Engine                 | Local runtime for Docker containers | Local Runtime      |
+| ㉑  | Movie API (Local Docker)      | API running in a Docker container on the Workspace | Local Runtime      |
+| ㉒  | GitHub                        | Central repository for source code | Source Control     |
+| ㉓  | GitHub Actions                | CI/CD automation platform | CI/CD            |
+endlegend
+
+@enduml

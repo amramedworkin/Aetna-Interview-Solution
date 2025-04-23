@@ -1,0 +1,84 @@
+@startuml 08a_Logical_Architecture_PRODUCTION
+!theme mars
+
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+skinparam titleFontSize 30
+title 08a_Logical_Architecture_PRODUCTION
+
+skinparam LegendBackgroundColor #F2F2F2
+skinparam LegendBorderColor #CCCCCC
+
+actor "External User" as User
+node "① External User Portal (Java/Node/Ruby)\n[Handles Login via Cognito]" as Portal
+
+cloud "② Amazon Cognito" as Cognito
+cloud "③ Amazon Route 53" as DNS
+cloud "④ AWS WAF" as WAF
+cloud "⑤ AWS Certificate Manager" as ACM
+node "⑥ ALB (HTTPS)" as ALB
+cloud "⑦ Amazon API Gateway" as APIGW
+component "⑧ Movie API (Spring Boot - ECS Fargate)" as API
+database "⑨ Amazon RDS (PostgreSQL - Prod)" as RDS
+cloud "⑪ Amazon CloudWatch" as CW
+cloud "⑬ Amazon SNS" as SNS
+cloud "⑭ Amazon ECR" as ECR
+cloud "⑩ AWS Secrets Manager" as Secrets
+cloud "⑫ AWS X-Ray" as XRay
+
+actor "⑮ DevOps Engineer" as DevOps << (S, #FF8C00) >>
+actor "⑯ Security Team" as Security << (S, #B0C4DE) >>
+actor "⑰ Performance Analyst" as PerfAnalyst << (S, #8FBC8F) >>
+
+' === Login Flow (External and Prior) ===
+User --> Portal : Logs in (via OAuth2)
+Portal --> Cognito : Initiates Auth Flow (OAuth2/OIDC)
+Cognito --> Portal : Returns ID and Access Tokens
+note right of Portal
+  Auth occurs outside Movie API scope.\n
+  This portal acquires Cognito tokens\n
+  for use in API calls via API Gateway.
+end note
+
+' === API Interaction Flow ===
+User --> DNS : movie-api.company.com
+DNS --> WAF : Secure Routing
+WAF --> ACM : TLS Termination
+WAF --> ALB : HTTPS Request
+ALB --> APIGW : API Traffic
+APIGW --> Cognito : Token Verification
+APIGW --> API : Forwarded Request
+API --> RDS : Secure JDBC (IAM Auth)
+API --> Secrets : Fetch DB Credentials
+API --> CW : Logs, Metrics
+API --> XRay : Traces
+CW --> SNS : Alerts
+SNS --> DevOps : Notification
+SNS --> Security : Security Alerts
+API --> ECR : Docker Image Pull
+XRay --> PerfAnalyst : Trace Analysis
+
+legend bottom
+|= Step |= Component |= Description |= Category |
+| ① | External Portal | User logs in | Authentication |
+| ② | Cognito  | Issues OAuth2 Tokens | Identity & Access |
+| ③ | Route 53 | DNS Resolution | Networking |
+| ④ | WAF + ACM | TLS + Web Protection | Security |
+| ⑤ | ALB | Load Balancing | Networking |
+| ⑥ | API Gateway | API Routing, Throttling | API Management |
+| ⑦ | Cognito  | Verifies Access Token | Identity & Access |
+| ⑧ | ECS Fargate | Movie API Compute | Compute |
+| ⑨ | RDS  | PostgreSQL Database | Data Layer |
+| ⑩ | Secrets Manager | Secure Credentials | Security |
+| ⑪ | CloudWatch | Logs & Metrics | Observability |
+| ⑫ | X-Ray | Tracing | Observability |
+| ⑬ | SNS | Notification | Monitoring |
+| ⑭ | ECR | Container Registry | CI/CD |
+| ⑮ | DevOps Engineer | Receives operational alerts | Alert Recipient |
+| ⑯ | Security Team | Receives security-related alerts | Alert Recipient |
+| ⑰ | Performance Analyst | Analyzes trace data for performance | Observability |
+endlegend
+
+@enduml

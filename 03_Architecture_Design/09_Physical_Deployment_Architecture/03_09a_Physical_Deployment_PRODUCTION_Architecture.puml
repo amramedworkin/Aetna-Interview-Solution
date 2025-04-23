@@ -1,0 +1,79 @@
+@startuml 09_Physical_Deployment_Diagram
+!theme mars
+
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+skinparam titleFontSize 30
+title 09_Physical_Deployment_Diagram
+
+' Make the legend/table lighter
+skinparam LegendBackgroundColor #F2F2F2  ' light gray
+skinparam LegendBorderColor #CCCCCC       ' subtle border
+
+skinparam cloudFontColor #000000
+skinparam rectangle {
+    BackgroundColor<<aws>> #f7faff
+    BorderColor<<aws>> #0096d6
+}
+
+actor "External User" as User
+actor "DevOps Engineer" as DevOps
+actor "Team Lead" as TL
+actor "Security Officer" as SecOff
+
+cloud "AWS Cloud" <<aws>> {
+  node "VPC (10.0.0.0/16)" <<aws>> {
+
+    rectangle "Public Subnet (10.0.1.0/24)" as PublicSubnet {
+      [① API Gateway] <<aws>>
+    }
+
+    rectangle "Private Subnet (10.0.2.0/24)" as PrivateSubnet {
+      [② ECS Fargate - Movie API] <<aws>>
+      [③ Amazon RDS - PostgreSQL] <<aws>>
+    }
+
+    rectangle "Shared Services (10.0.3.0/24)" as SharedServices {
+      [④ Amazon Cognito] <<aws>>
+      [⑤ AWS Secrets Manager] <<aws>>
+      [⑥ AWS Systems Manager (SSM)] <<aws>>
+      [⑦ Amazon CloudWatch] <<aws>>
+      [⑧ Amazon SNS (Alerts)] <<aws>>
+    }
+  }
+}
+
+' User interaction flow
+User --> [① API Gateway] : HTTPS Request
+[① API Gateway] --> [② ECS Fargate - Movie API] : API Call Routing
+[② ECS Fargate - Movie API] --> [③ Amazon RDS - PostgreSQL] : Secure JDBC
+[② ECS Fargate - Movie API] --> [④ Amazon Cognito] : Token Verification
+[② ECS Fargate - Movie API] --> [⑤ AWS Secrets Manager] : Retrieve Secrets
+[② ECS Fargate - Movie API] --> [⑥ AWS Systems Manager (SSM)] : Config Parameters
+[② ECS Fargate - Movie API] --> [⑦ Amazon CloudWatch] : Logs, Metrics
+[⑦ Amazon CloudWatch] --> [⑧ Amazon SNS (Alerts)] : Alerts
+
+' SNS alert flow to recipients
+[⑧ Amazon SNS (Alerts)] --> DevOps : Notify
+[⑧ Amazon SNS (Alerts)] --> TL : Notify
+[⑧ Amazon SNS (Alerts)] --> SecOff : Notify
+
+' Legend for the components
+legend bottom
+|= # |= Component |= Description of Purpose |= Category |
+| 1 | API Gateway | Entry point for all HTTPS traffic | API Management |
+| 2 | ECS Fargate | Stateless compute container for API | Compute |
+| 3 | Amazon RDS | PostgreSQL database for persistent storage | Database |
+| 4 | Cognito | Federated identity & token verification | Identity & Security |
+| 5 | Secrets Manager | Secure store for DB/API secrets | Security |
+| 6 | Systems Manager | Parameter store for config & secrets | Management |
+| 7 | CloudWatch | Observability: Logs, metrics, alarms | Monitoring |
+| 8 | SNS | Push notifications for alerts/events | Notification |
+| - | DevOps Engineer | Receives infrastructure and system-level alerts | Alert Recipient |
+| - | Team Lead | Receives alerts related to API or team-level operations | Alert Recipient |
+| - | Security Officer | Receives alerts for auth, data, or access violations | Alert Recipient |
+endlegend
+
+@enduml

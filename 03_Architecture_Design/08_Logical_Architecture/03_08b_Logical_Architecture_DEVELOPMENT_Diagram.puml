@@ -1,0 +1,62 @@
+@startuml 08b_Logical_Architecture_DEVELOPMENT
+!theme mars
+
+' Project and Title Header
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+skinparam titleFontSize 30
+title 08b_Logical_Architecture_DEVELOPMENT
+
+' Make the legend/table lighter
+skinparam LegendBackgroundColor #F2F2F2  ' light gray
+skinparam LegendBorderColor #CCCCCC    ' subtle border
+
+actor "Developer" as Dev
+database "⑤ SQLite (Local)" as SQLite
+database "⑥ Amazon RDS (Dev)" as DevRDS
+cloud "⑩ Amazon Cognito (Dev Pool)" as DevCognito
+cloud "① Amazon Workspaces" as Workspaces
+cloud "⑨ Amazon API Gateway (Dev)" as DevAPI
+cloud "② GitHub" as GitHub
+cloud "④ Amazon ECR" as DevECR
+cloud "⑪ AWS CloudWatch (Dev Logs)" as DevCW
+cloud "③ GitHub Actions (CI/CD)" as GHCI
+cloud "⑫ AWS Secrets Manager (Dev)" as DevSecrets
+
+node "Dev Workspace" as WS
+component "⑦ Movie API (Spring Boot - Docker)" as LocalAPI
+component "⑧ Movie API (Spring Boot - Dev ECS)" as ECSDev
+
+Dev --> WS : Connect via Workspaces
+WS --> GitHub : Clone Repo / Push Code
+WS --> SQLite : Local Dev DB
+WS --> LocalAPI : Run Locally
+WS --> DevRDS : Shared Dev DB
+WS --> DevSecrets : Access Secrets
+ LocalAPI --> SQLite : ORM
+ GitHub --> GHCI : Push Triggers CI
+ GHCI --> DevECR : Docker Push
+ GHCI --> ECSDev : Dev Deploy
+ DevAPI --> DevCognito : Auth
+ DevAPI --> ECSDev : API Calls
+ ECSDev --> DevRDS : JDBC
+ ECSDev --> DevCW : Logs
+ ' UML Table for Development Components
+legend bottom
+|= Step |= Component |= Description |= Category |
+| 1  | Workspaces        | Dev VDI             | Virtual Desktop  |
+| 2  | GitHub            | Code + CI/CD Trigger | DevOps           |
+| 3  | GitHub Actions    | Build + Test + Deploy | CI/CD            |
+| 4  | ECR (Dev)         | Docker Registry     | Container Registry |
+| 5  | SQLite            | Local Dev DB        | Local DB         |
+| 6  | RDS (Dev)         | Shared Dev DB       | Managed DB       |
+| 7  | Spring Boot Docker| Local API Container | Local Runtime    |
+| 8  | ECS (Dev)         | Fargate Dev Deploy  | Cloud Compute    |
+| 9  | API Gateway (Dev) | Auth + Routing      | API Management   |
+| 10 | Cognito (Dev)     | Auth Provider       | Identity         |
+| 11 | CloudWatch (Dev)    | Dev Logs            | Observability    |
+| 12 | Secrets Manager (Dev)| Store Secrets       | Security         |
+endlegend
+@enduml

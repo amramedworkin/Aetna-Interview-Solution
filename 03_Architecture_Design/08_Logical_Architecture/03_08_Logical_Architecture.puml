@@ -1,0 +1,117 @@
+@startuml 08_Logical_Architecture
+
+skinparam HeaderFontSize 20
+skinparam HeaderFontColor #00008B
+header Aetna Interview Project
+
+skinparam titleFontSize 25
+title 08_Logical_Architecture
+
+skinparam LegendBackgroundColor #F2F2F2
+skinparam LegendBorderColor #CCCCCC
+
+actor "External User" as User
+actor "Developer" as Dev
+
+package "Prod Environment" {
+  cloud "① Route 53" as DNS
+  cloud "② AWS WAF\n& ACM" as WAF
+  node "③ ALB (HTTPS)" as ALB
+  cloud "④ API Gateway (Prod)" as APIGW
+  component "⑥ Movie API (ECS Fargate - Prod)" as API
+  database "⑦ Amazon RDS (PostgreSQL - Prod)" as RDS
+  cloud "⑤ Cognito (Prod)" as Cognito
+  cloud "⑧ Secrets Manager (Prod)" as Secrets
+  cloud "⑨ CloudWatch (Prod)" as CW
+  cloud "⑩ SNS (Prod)" as SNS
+  cloud "⑪ X-Ray" as XRay
+}
+
+package "Dev Environment" {
+  cloud "⑯ Amazon Workspaces" as Workspaces
+  node "⑰ Dev Workspace" as WS
+  database "⑱ SQLite (Local)" as SQLite
+  database "⑦ Amazon RDS (Dev)" as DevRDS
+  component "⑰ Movie API (Local Docker)" as LocalAPI
+  component "⑥ Movie API (ECS Fargate - Dev)" as DevAPI
+  cloud "⑤ Cognito (Dev)" as DevCognito
+  cloud "④ API Gateway (Dev)" as DevAPIGW
+  cloud "⑧ Secrets Manager (Dev)" as DevSecrets
+  cloud "⑨ CloudWatch (Dev)" as DevCW
+}
+
+package "CI/CD Pipeline" {
+  cloud "⑫ GitHub" as GitHub
+  cloud "⑬ GitHub Actions" as GHActions
+  cloud "⑭ AWS CDK" as CDK
+  cloud "⑮ Amazon ECR" as ECR
+  cloud "⑨ CloudWatch (CI Logs)" as CWCI
+  cloud "⑩ Slack / SNS" as Notifications
+}
+
+' PROD FLOW
+User --> DNS : movie-api.company.com
+DNS --> WAF
+WAF --> ALB
+ALB --> APIGW
+APIGW --> Cognito
+APIGW --> API
+API --> RDS
+API --> Secrets
+API --> CW
+API --> XRay
+CW --> SNS
+API --> ECR
+
+' DEV FLOW
+Dev --> Workspaces : Login
+Workspaces --> WS : Access Dev Tools
+WS --> GitHub : Clone Repo / Push Code
+WS --> SQLite
+WS --> LocalAPI
+WS --> DevSecrets
+WS --> DevRDS
+LocalAPI --> SQLite
+LocalAPI --> DevSecrets
+
+Dev --> DevAPIGW
+DevAPIGW --> DevCognito
+DevAPIGW --> DevAPI
+DevAPI --> DevRDS
+DevAPI --> DevCW
+
+' CI/CD FLOW
+GitHub --> GHActions : Code Push
+GHActions --> GHActions : Build/Test
+GHActions --> ECR : Docker Push
+GHActions --> CDK : Deploy Stack
+CDK --> DevAPI : Dev Deploy
+CDK --> API : Prod Deploy
+CWCI --> Notifications
+CW --> Notifications
+
+DevAPI --> ECR : Pull Dev Image
+API --> ECR : Pull Prod Image
+
+legend bottom
+|= # |= Component |= Description |= Category |
+| ① | Route 53 | DNS Resolution | Networking |
+| ② | WAF + ACM | TLS + Web Protection | Security |
+| ③ | ALB | Load Balancer | Networking |
+| ④ | API Gateway (Prod & Dev) | API Routing/Throttling | API Mgmt |
+| ⑤ | Cognito (Prod & Dev) | AuthN/AuthZ | Identity |
+| ⑥ | ECS Fargate (Dev & Prod) | App Deployment | Compute |
+| ⑦ | RDS (Dev & Prod) | PostgreSQL DB | Database |
+| ⑧ | Secrets Manager (Both) | Credential Mgmt | Security |
+| ⑨ | CloudWatch (All) | Logs + Metrics | Observability |
+| ⑩ | SNS / Slack | Notifications | Notification |
+| ⑪ | X-Ray | Tracing | Observability |
+| ⑫ | GitHub | Repo + Triggers | DevOps |
+| ⑬ | GitHub Actions | CI/CD Automation | CI/CD |
+| ⑭ | CDK | Infra-as-Code | IaC |
+| ⑮ | ECR | Docker Registry | Container Registry |
+| ⑯ | Amazon Workspaces | Dev VDI | Developer Tools |
+| ⑰ | Dev Workspace | Local Docker / Code | Local |
+| ⑱ | SQLite | Local DB | Local Dev |
+endlegend
+@enduml
