@@ -11,13 +11,13 @@ Welcome to the Solution Architecture Package for the Aetna Interview Project - M
 `Physical Architecture`
 ![Physical Deployment Diagram](./03_Architecture_Design/03_09_Physical_Deployment_Diagram.svg)
 
-## FOLDER: 00_ReadMe/
+## 📘 00_ReadMe/
 ### `00_00_ReadMe.md` [click](00_ReadMe/00_00_ReadMe.md)
 This file. Describes the full structure, purpose, and navigation of the solution architecture package.
 
 ---
 
-## FOLDER: 01_Business_Context/
+## 💼 01_Business_Context/
 ### `01_01_Project_Goals_and_Objectives.docx` [click](01_Business_Context/01_01_Project_Goals_and_Objectives.docx)
 Outlines the business drivers, success criteria, and objectives of the project.
 
@@ -29,7 +29,7 @@ Visual map connecting business capabilities to proposed technical components and
 
 ---
 
-## FOLDER: 02_Requirements/
+## ✅ 02_Requirements/
 ### `02_04_Functional_Requirements.docx` [click](02_Requirements/02_04_Functional_Requirements.docx)
 Captures user stories and high-level system functions required to meet the business needs.
 
@@ -41,23 +41,23 @@ Ensures that each business requirement is mapped to system components and addres
 
 ---
 
-## FOLDER: 03_Architecture_Design/
-### `03_07_Context_Diagram.puml` [image](03_Architecture_Design/03_07_Context_Diagram.svg) [puml](03_Architecture_Design/03_07_Context_Diagram.puml)
+## 🏗️ 03_Architecture_Design/
+### `03_07_Context_Diagram.puml` [image,](03_Architecture_Design/03_07_Context_Diagram.svg) [puml](03_Architecture_Design/03_07_Context_Diagram.puml)
 Visual diagram showing the boundaries of the system, external users, and interfacing systems.
 
-### `03_08_Logical_Architecture.puml / 03_08_Logical_Architecture.svg` [full](03_Architecture_Design/03_08_Logical_Architecture_Diagram.svg) [production](03_Architecture_Design/08_Logical_Architecture/03_08a_Logical_Architecture_PRODUCTION_Diagram.svg) [development](03_Architecture_Design/08_Logical_Architecture/03_08b_Logical_Architecture_DEVELOPMENT_Diagram.svg) [CICD](03_Architecture_Design/08_Logical_Architecture/03_08c_Logical_Architecture_CICD_PIPELINE.svg)
+### `03_08_Logical_Architecture.puml / 03_08_Logical_Architecture.svg` [full,](03_Architecture_Design/03_08_Logical_Architecture_Diagram.svg) [production,](03_Architecture_Design/08_Logical_Architecture/03_08a_Logical_Architecture_PRODUCTION_Diagram.svg) [development,](03_Architecture_Design/08_Logical_Architecture/03_08b_Logical_Architecture_DEVELOPMENT_Diagram.svg) [CICD](03_Architecture_Design/08_Logical_Architecture/03_08c_Logical_Architecture_CICD_PIPELINE.svg)
 Shows the logical structure of components, services, and data flow  abstracted from physical deployment details.
 
-### `03_09_Physical_Deployment_Diagram.puml / 03_09_Physical_Deployment_Diagram.svg` [click](03_Architecture_Design/03_09_Physical_Deployment_Diagram.puml)
+### `03_09_Physical_Deployment_Diagram.puml / 03_09_Physical_Deployment_Diagram.svg` [full,](03_Architecture_Design/03_09_Physical_Deployment_Diagram.svg) [production,](03_Architecture_Design/09_Physical_Deployment_Architecture/03_09a_Physical_Deployment_PRODUCTION_Architecture.svg) [development](03_Architecture_Design/09_Physical_Deployment_Architecture/03_09b_Physical_Deployment_DEVELOPMENT_Architecture.svg)
 Provides the actual deployment layout (AWS resources such as VPCs, ECS, RDS, etc.) for production infrastructure.
 
-### `03_10_Data_Model.puml / 03_10_Data_Model.svg` [click](03_Architecture_Design/03_10_Data_Model.puml)
+### `03_10_Data_Model.puml / 03_10_Data_Model.svg` [image](03_Architecture_Design/03_10_Data_Model.svg)
 Logical entity-relationship diagram representing domain models such as Movies and Ratings.
 
-### `03_11_Integration_Model.puml / 03_11_Integration_Model.svg` [click](03_Architecture_Design/03_11_Integration_Model.puml)
+### `03_11_Integration_Model.puml / 03_11_Integration_Model.svg` [image](03_Architecture_Design/03_11_Integration_Model.svg)
 Details interfaces, API endpoints, protocols, and data flow across systems and services.
 
-### `03_12_Security_Architecture_Overview.docx` [click](03_Architecture_Design/03_12_Security_Architecture_Overview.docx)
+### `03_12_Security_Architecture_Overview.docx` [doc,](03_Architecture_Design/12_Security_Architecture/03_12_Security_Architecture_Overview.docx) [image](03_Architecture_Design/03_12_Security_Architecture_Overview.svg)
 Covers authentication, authorization, data encryption, access policies, and compliance requirements using AWS services like Cognito and Secrets Manager.
 
 ### `03_13_ADRs/`
@@ -65,7 +65,7 @@ Contains Architecture Decision Records (`.md` files) documenting important desig
 
 ---
 
-## FOLDER: 04_Risk_and_Tradeoffs/
+## ⚖️ 04_Risk_and_Tradeoffs/
 ### `04_14_Risk_Register.xlsx` [click](04_Risk_and_Tradeoffs/04_14_Risk_Register.xlsx)
 Lists risks specific to the architecture, their probability and impact, and defined mitigation strategies.
 
@@ -77,7 +77,7 @@ Documents key assumptions (e.g., developer skill sets, AWS usage) and external d
 
 ---
 
-## FOLDER: 05_Roadmap/
+## 🗺️ 05_Roadmap/
 ### `05_17_Implementation_Roadmap.xlsx` [click](05_Roadmap/05_17_Implementation_Roadmap.xlsx)
 Outlines the project phases, timelines, and key milestones.
 
@@ -86,7 +86,7 @@ Presentation slide summarizing the phased implementation plan in a visual format
 
 ---
 
-## FOLDER: 06_Final_Delivery/
+## 📦 06_Final_Delivery/
 ### `06_19_Architecture_Overview_OnePager.pdf` [click](06_Final_Delivery/06_19_Architecture_Overview_OnePager.pdf)
 Single-page visual + narrative summary of the architecture  suitable for executive review.
 
@@ -98,7 +98,7 @@ Checklist of all included artifacts with descriptions, intended audiences, and o
 
 ---
 
-## FOLDER: 07_Internal_Working_Files/ *(Not client-deliverable)*
+## 🧪 07_Internal_Working_Files/ *(Not client-deliverable)*
 Contains scratch work, interview notes, and design prototypes.
 
 - `Interviews/`: Discovery notes, user interviews
