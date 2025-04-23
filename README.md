@@ -6,7 +6,7 @@ Welcome to the Solution Architecture Package for the Aetna Interview Project - M
 
 ---
 `Logical Architecture`
-![Logical Architecture](./03_Architecture_Design/03_08_Logical_Architecture.svg)
+![Logical Architecture](./03_Architecture_Design/03_08_Logical_Architecture_Diagram.svg)
 
 `Physical Architecture`
 ![Physical Deployment Diagram](./03_Architecture_Design/03_09_Physical_Deployment_Diagram.svg)
